@@ -55,7 +55,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 
 /* ============ CURSOR ============ */
 .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9000; border-radius: 50%; }
-.cursor-dot { width: 8px; height: 8px; background: var(--yellow); margin: -4px 0 0 -4px; mix-blend-mode: difference; }
+.cursor-dot { width: 8px; height: 8px; background: var(--yellow); margin: -4px 0 0 -4px; box-shadow: 0 0 0 2px rgba(15,15,15,.6); }
 .cursor-ring {
   width: 40px; height: 40px; margin: -20px 0 0 -20px;
   border: 1.5px solid rgba(15,15,15,.45);
@@ -152,7 +152,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
   display: flex; justify-content: center;
   font-weight: 700; letter-spacing: -.06em; line-height: .82;
   font-size: 15vw; white-space: nowrap;
-  overflow: hidden; padding-bottom: .06em;
+  overflow: hidden; padding: 0 .1em .26em; margin-bottom: -.2em;
 }
 .hero-word span { display: inline-block; transform: translateY(105%); }
 .hero-word .y { color: var(--yellow); }
@@ -248,7 +248,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 .sec-sub.light { color: rgba(255,255,255,.7); margin: 18px auto 0; max-width: 560px; }
 
 /* split words */
-.w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .12em .22em .04em; margin: 0 -.12em -.22em -.04em; }
 .w > span { display: inline-block; transform: translateY(110%) rotate(6deg); transform-origin: left bottom; transition: transform 1s var(--ease); transition-delay: calc(var(--wi) * 50ms); }
 .in .w > span { transform: none; }
 
