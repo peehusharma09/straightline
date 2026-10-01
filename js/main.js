@@ -163,15 +163,13 @@ if (!isTouch) {
   });
 }
 
-/* ---------- TOAST + COUNTERS ---------- */
+/* ---------- TOAST ---------- */
 let toastT;
 function toast(msg) {
   const t = $("#toast"); t.textContent = msg; t.classList.add("show");
   clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2400);
 }
-const state = { cart: 0, wish: 0 };
-function bumpBadge(id, val) { const b = $(id); b.textContent = val; b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); }
-function addToCart(name) { state.cart++; bumpBadge("#cartCount", state.cart); toast(`${name} added to cart`); }
+const esc = v => String(v).replace(/"/g, "&quot;");
 
 /* ---------- PRODUCTS ---------- */
 const chipsEl = $("#chips"), grid = $("#productGrid");
@@ -187,15 +185,13 @@ function renderProducts() {
       <div class="p-img">
         <img src="${img(p.img)}" alt="${p.name}" loading="lazy" />
         ${p.tag ? `<span class="p-tag ${p.tc || ""}">${p.tag}</span>` : ""}
-        <button class="p-wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
-        <button class="p-add" data-name="${p.name}">Add to cart +</button>
       </div>
       <div class="p-body">
         <span class="p-cat">${p.type}</span>
         <h4>${p.name}</h4>
         <div class="p-row">
-          <span class="p-price">${inr(p.price)}<s>${inr(p.mrp)}</s></span>
           <span class="p-rate"><b>★</b> ${p.rate}</span>
+          <button class="p-book" data-book="${esc(p.name)}">Book now</button>
         </div>
         <div class="p-swatches">${p.sw.map(c => `<i style="background:${c}"></i>`).join("")}</div>
       </div>
@@ -211,16 +207,6 @@ function setFilter(f) {
   if (active) chipsEl.scrollTo({ left: active.offsetLeft - chipsEl.clientWidth / 2 + active.offsetWidth / 2, behavior: "smooth" });
 }
 chipsEl.addEventListener("click", e => { const c = e.target.closest(".chip"); if (c) setFilter(c.dataset.f); });
-grid.addEventListener("click", e => {
-  const add = e.target.closest(".p-add"), wish = e.target.closest(".p-wish");
-  if (add) addToCart(add.dataset.name);
-  if (wish) {
-    wish.classList.toggle("on");
-    state.wish += wish.classList.contains("on") ? 1 : -1;
-    bumpBadge("#wishCount", state.wish);
-    if (wish.classList.contains("on")) toast("Saved to wishlist");
-  }
-});
 $$("[data-cat]").forEach(a => a.addEventListener("click", () => setFilter(a.dataset.cat)));
 renderChips(); renderProducts();
 
@@ -275,6 +261,7 @@ function showAiResult() {
   for (const p of [...pool].sort(() => Math.random() - .5)) { if (picks.length < 3 && p.price <= left) { picks.push(p); left -= p.price; } }
   for (const p of pool) { if (picks.length >= 3) break; if (!picks.includes(p)) picks.push(p); }
   const total = picks.reduce((s, p) => s + p.price, 0);
+  const lookName = `AI look: ${ai.style} ${ai.room.toLowerCase()} (${picks.map(p => p.name).join(", ")}), budget ${inr(ai.budget)}`;
   const score = Math.min(99, 86 + Math.floor(Math.random() * 12) + (total <= ai.budget ? 2 : -6));
   const pal = STYLE_PALETTES[ai.style];
   $("#aiResult").innerHTML = `
@@ -283,12 +270,11 @@ function showAiResult() {
       <div class="match"><svg viewBox="0 0 74 74"><circle class="bg" cx="37" cy="37" r="32"/><circle class="fg" cx="37" cy="37" r="32"/></svg><b>${score}%</b></div>
     </div>
     <div class="palette">${pal.map((c, i) => `<i style="background:${c};--i:${i}" data-hex="${c}"></i>`).join("")}</div>
-    <div class="ai-picks">${picks.map((p, i) => `<div class="ai-pick" style="--i:${i}"><img src="${img(p.img, 400)}" alt="${p.name}"/><b>${p.name}</b><span>${inr(p.price)}</span></div>`).join("")}</div>
-    <div class="ai-total"><span>Look total<br><b>${inr(total)}</b></span><button id="aiAddAll">Add all to cart</button></div>`;
+    <div class="ai-picks">${picks.map((p, i) => `<div class="ai-pick" style="--i:${i}"><img src="${img(p.img, 400)}" alt="${p.name}"/><b>${p.name}</b><span>${p.type}</span></div>`).join("")}</div>
+    <div class="ai-total"><span>${picks.length} pieces picked for you<br><b>Like this look?</b></span><button data-book="${esc(lookName)}">Book this look</button></div>`;
   requestAnimationFrame(() => requestAnimationFrame(() => {
     $(".match .fg").style.strokeDashoffset = 201 - (201 * score) / 100;
   }));
-  $("#aiAddAll").addEventListener("click", () => { state.cart += picks.length; bumpBadge("#cartCount", state.cart); toast(`${picks.length} pieces added to cart`); });
 }
 
 /* ---------- COUNTERS ---------- */
@@ -370,10 +356,104 @@ addEventListener("scroll", () => { if (!ticking) { requestAnimationFrame(onScrol
 addEventListener("resize", onScroll);
 onScroll();
 
-/* ---------- FORM ---------- */
-$("#ctaForm").addEventListener("submit", e => {
+/* ---------- BOOKING + EMAIL ---------- */
+// Leads are emailed through FormSubmit (https://formsubmit.co), a free form-to-email service.
+// Put the inbox that should receive bookings here. The first submission sends a one time
+// activation email to this address; click "Activate" in it and every booking after that arrives.
+const LEAD_EMAIL = "YOUR_EMAIL@example.com";
+
+async function sendLead(fields) {
+  if (LEAD_EMAIL.startsWith("YOUR_EMAIL")) throw new Error("Booking email is not set up yet.");
+  const res = await fetch(`https://formsubmit.co/ajax/${LEAD_EMAIL}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      ...fields,
+      Page: location.href,
+      _subject: `New booking: ${fields["Interested in"] || "Straightline enquiry"} (${fields.Name})`,
+      _template: "table",
+      _captcha: "false",
+    }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || String(data.success) !== "true") throw new Error(data.message || "Could not send right now.");
+}
+
+const validPhone = v => v.replace(/\D/g, "").length >= 10;
+const validEmail = v => !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+const modal = $("#bookModal"), bookForm = $("#bookForm"), bookErr = $("#bookError"), bookBtn = $("#bookSubmit");
+function openBook(product) {
+  modal.classList.remove("done");
+  bookErr.textContent = "";
+  $("#bookFor").textContent = product ? (product.length > 40 ? "your look" : product) : "your furniture";
+  $("#bProduct").value = product || "";
+  modal.classList.add("open"); modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => $("#bName").focus(), 350);
+}
+function closeBook() {
+  modal.classList.remove("open"); modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-book]");
+  if (b) { e.preventDefault(); openBook(b.dataset.book); return; }
+  if (e.target.closest("[data-close]")) closeBook();
+});
+addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeBook(); });
+
+bookForm.addEventListener("submit", async e => {
   e.preventDefault();
-  const name = $("#fName").value.trim().split(" ")[0] || "there";
-  toast(`Thanks ${name}! We'll call you within 30 minutes.`);
-  e.target.reset();
+  if ($("#bHoney").value) return;
+  const f = {
+    Name: $("#bName").value.trim(),
+    Phone: $("#bPhone").value.trim(),
+    Email: $("#bEmail").value.trim(),
+    City: $("#bCity").value.trim(),
+    "Interested in": $("#bProduct").value.trim() || "General enquiry",
+    "Connect via": $("#bVisit").value,
+    Message: $("#bMsg").value.trim(),
+  };
+  if (!f.Name || !f.City || !f["Connect via"]) return (bookErr.textContent = "Please fill all fields marked *.");
+  if (!validPhone(f.Phone)) return (bookErr.textContent = "Please enter a valid 10 digit phone number.");
+  if (!validEmail(f.Email)) return (bookErr.textContent = "Please enter a valid email or leave it empty.");
+  bookErr.textContent = "";
+  bookBtn.disabled = true; bookBtn.firstChild.textContent = "Sending... ";
+  try {
+    await sendLead(f);
+    $("#doneName").textContent = f.Name.split(" ")[0];
+    modal.classList.add("done");
+    bookForm.reset();
+  } catch (err) {
+    bookErr.textContent = `${err.message} Please call us or try again.`;
+  } finally {
+    bookBtn.disabled = false; bookBtn.firstChild.textContent = "Send booking request ";
+  }
+});
+
+$("#ctaForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const form = e.target, err = $("#ctaError"), btn = $("button[type=submit]", form);
+  const f = {
+    Name: $("#fName").value.trim(),
+    Phone: $("#fPhone").value.trim(),
+    Email: $("#fEmail").value.trim(),
+    "Interested in": $("#fNeed").value,
+    Message: "Call back request from the contact section",
+  };
+  if (!f.Name || !f["Interested in"]) return (err.textContent = "Please fill in your name and what you're looking for.");
+  if (!validPhone(f.Phone)) return (err.textContent = "Please enter a valid 10 digit phone number.");
+  if (!validEmail(f.Email)) return (err.textContent = "Please enter a valid email or leave it empty.");
+  err.textContent = "";
+  btn.disabled = true;
+  try {
+    await sendLead(f);
+    toast(`Thanks ${f.Name.split(" ")[0]}! We'll call you within 30 minutes.`);
+    form.reset();
+  } catch (ex) {
+    err.textContent = `${ex.message} Please try again.`;
+  } finally {
+    btn.disabled = false;
+  }
 });

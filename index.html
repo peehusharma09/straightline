@@ -39,17 +39,7 @@
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-actions">
-      <button class="icon-btn" aria-label="Search">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      </button>
-      <button class="icon-btn" aria-label="Wishlist">
-        <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
-        <em class="badge" id="wishCount">0</em>
-      </button>
-      <button class="icon-btn" aria-label="Cart">
-        <svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 11h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
-        <em class="badge" id="cartCount">0</em>
-      </button>
+      <button class="btn btn-dark nav-book" data-book>Book now</button>
       <button class="burger" id="burger" aria-label="Menu"><i></i><i></i></button>
     </div>
   </header>
@@ -76,8 +66,8 @@
           <h2>Furniture that <em>fits</em> your life, in a straight line.</h2>
           <p>Beds, sofas, dining sets, chairs, cabinets and storage. Designed smart, built straight and delivered to your door.</p>
           <div class="hero-btns">
-            <a href="#products" class="btn btn-yellow magnetic">Shop collection <span class="arr">→</span></a>
-            <a href="#ai-planner" class="btn btn-ghost magnetic">Try AI planner</a>
+            <button class="btn btn-yellow magnetic" data-book>Book now <span class="arr">→</span></button>
+            <a href="#products" class="btn btn-ghost magnetic">Explore products</a>
           </div>
         </div>
 
@@ -86,7 +76,7 @@
           <div>
             <small>Best seller</small>
             <b>Moulded Chair</b>
-            <span>₹ 2,499</span>
+            <span>12 colours</span>
           </div>
         </div>
 
@@ -165,7 +155,7 @@
           <span class="eyebrow" data-reveal="up">02 / Product types</span>
           <h2 class="sec-title" data-split>Pick a piece, <em>we'll do the rest.</em></h2>
         </div>
-        <p class="sec-sub" data-reveal="up">Tap a product type to filter. Every piece comes with free delivery, installation and a 5 year warranty.</p>
+        <p class="sec-sub" data-reveal="up">Tap a product type to filter. Like something? Hit Book now and our team will call you with details and a free home visit.</p>
       </div>
 
       <div class="chips" id="chips" data-reveal="up"></div>
@@ -178,19 +168,19 @@
         <div class="look-text">
           <span class="eyebrow" data-reveal="up">03 / Shop the look</span>
           <h2 class="sec-title" data-split>Tap the dots. <em>Own the room.</em></h2>
-          <p data-reveal="up">Every room we style is fully shoppable. Hover on the glowing points to see what's inside and add it straight to your cart.</p>
+          <p data-reveal="up">Every room we style is fully shoppable. Hover on the glowing points to see what's inside and book it in one tap.</p>
           <ul class="look-list" data-reveal="up">
-            <li><b>01</b> Yellow lounge chair <span>₹ 14,999</span></li>
-            <li><b>02</b> Brass floor lamp <span>₹ 4,299</span></li>
-            <li><b>03</b> Low TV console <span>₹ 18,499</span></li>
+            <li><b>01</b> Yellow lounge chair <button class="look-book" data-book="Yellow lounge chair">Book</button></li>
+            <li><b>02</b> Brass floor lamp <button class="look-book" data-book="Brass floor lamp">Book</button></li>
+            <li><b>03</b> Low TV console <button class="look-book" data-book="Low TV console">Book</button></li>
           </ul>
-          <a href="#products" class="btn btn-dark magnetic" data-reveal="up">Shop this room <span class="arr">→</span></a>
+          <button class="btn btn-dark magnetic" data-reveal="up" data-book="Complete room: yellow chair, floor lamp, TV console">Book this room <span class="arr">→</span></button>
         </div>
         <div class="look-img" data-reveal="scale">
           <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1400&q=80&auto=format&fit=crop" alt="Styled living room" />
-          <button class="hotspot" style="left:46%;top:62%"><i></i><span class="tip"><b>Yellow lounge chair</b>₹ 14,999</span></button>
-          <button class="hotspot" style="left:34%;top:30%"><i></i><span class="tip"><b>Brass floor lamp</b>₹ 4,299</span></button>
-          <button class="hotspot" style="left:80%;top:68%"><i></i><span class="tip"><b>Low TV console</b>₹ 18,499</span></button>
+          <button class="hotspot" data-book="Yellow lounge chair" style="left:46%;top:62%"><i></i><span class="tip"><b>Yellow lounge chair</b>Tap to book</span></button>
+          <button class="hotspot" data-book="Brass floor lamp" style="left:34%;top:30%"><i></i><span class="tip"><b>Brass floor lamp</b>Tap to book</span></button>
+          <button class="hotspot" data-book="Low TV console" style="left:80%;top:68%"><i></i><span class="tip"><b>Low TV console</b>Tap to book</span></button>
         </div>
       </div>
     </section>
@@ -362,10 +352,11 @@
             <li>✓ No cost EMI available</li>
           </ul>
         </div>
-        <form class="cta-form" id="ctaForm" data-reveal="scale">
+        <form class="cta-form" id="ctaForm" data-reveal="scale" novalidate>
           <h3>Book a free consult</h3>
           <div class="field"><input type="text" id="fName" required placeholder=" " /><label for="fName">Your name</label></div>
           <div class="field"><input type="tel" id="fPhone" required placeholder=" " /><label for="fPhone">Phone number</label></div>
+          <div class="field"><input type="email" id="fEmail" placeholder=" " /><label for="fEmail">Email (optional)</label></div>
           <div class="field">
             <select id="fNeed" required>
               <option value="" disabled selected hidden></option>
@@ -377,6 +368,7 @@
             </select>
             <label for="fNeed">I'm looking for</label>
           </div>
+          <p class="form-error" id="ctaError"></p>
           <button class="btn btn-dark big magnetic" type="submit">Request a call back <span class="arr">→</span></button>
         </form>
       </div>
@@ -400,6 +392,44 @@
     <div class="foot-giant" aria-hidden="true">strai<span>g</span>htline</div>
     <div class="foot-bottom"><span>© 2026 Straightline Furniture. All rights reserved.</span><a href="#home" class="to-top">Back to top ↑</a></div>
   </footer>
+
+  <!-- BOOKING POPUP -->
+  <div class="modal" id="bookModal" aria-hidden="true">
+    <div class="modal-bg" data-close></div>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
+      <button class="modal-close" data-close aria-label="Close">×</button>
+      <span class="pill"><i class="dot"></i> Free consultation</span>
+      <h3 id="bookTitle">Book <em id="bookFor">your furniture</em></h3>
+      <p class="modal-sub">Share your details and our team will call you back within 30 minutes with designs, sizes and a free home visit.</p>
+      <form class="book-form" id="bookForm" novalidate>
+        <div class="field"><input type="text" id="bName" required placeholder=" " /><label for="bName">Full name *</label></div>
+        <div class="field"><input type="tel" id="bPhone" required placeholder=" " /><label for="bPhone">Phone number *</label></div>
+        <div class="field"><input type="email" id="bEmail" placeholder=" " /><label for="bEmail">Email</label></div>
+        <div class="field"><input type="text" id="bCity" required placeholder=" " /><label for="bCity">City *</label></div>
+        <div class="field full"><input type="text" id="bProduct" placeholder=" " /><label for="bProduct">Interested in</label></div>
+        <div class="field full">
+          <select id="bVisit" required>
+            <option value="" disabled selected hidden></option>
+            <option>Free home visit</option>
+            <option>Visit your studio</option>
+            <option>Video call</option>
+            <option>Just call me back</option>
+          </select>
+          <label for="bVisit">How should we connect? *</label>
+        </div>
+        <div class="field full"><textarea id="bMsg" placeholder=" "></textarea><label for="bMsg">Size, colour or anything else (optional)</label></div>
+        <input type="text" class="hp" id="bHoney" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <p class="form-error" id="bookError"></p>
+        <button class="btn btn-yellow big full" type="submit" id="bookSubmit">Send booking request <span class="arr">→</span></button>
+      </form>
+      <div class="book-done">
+        <div class="done-tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h3>Booking received!</h3>
+        <p>Thank you <b id="doneName"></b>. Our team will call you within 30 minutes.</p>
+        <button class="btn btn-dark" data-close>Done</button>
+      </div>
+    </div>
+  </div>
 
   <div class="toast" id="toast"></div>
 
