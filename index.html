@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Straightline Furniture | Furniture for every corner of your home</title>
+  <meta name="description" content="Straightline Furniture: beds, sofas, dining sets, chairs, TV cabinets, study tables, shoe racks and more. Designed smart, built straight." />
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="pre-word">
+      <span>s</span><span>t</span><span>r</span><span>a</span><span>i</span><span class="y">g</span><span>h</span><span>t</span><span>l</span><span>i</span><span>n</span><span>e</span>
+    </div>
+    <div class="pre-line"><i></i></div>
+    <p class="pre-count"><b id="preCount">0</b>%</p>
+  </div>
+
+  <!-- CURSOR + PROGRESS -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"><span>View</span></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="#home" class="nav-logo"><img src="assets/logo.png" alt="Straightline" /></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#categories">Categories</a>
+      <a href="#products">Products</a>
+      <a href="#ai-planner">AI Planner</a>
+      <a href="#lookbook">Lookbook</a>
+      <a href="#process">How we craft</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+        <em class="badge" id="wishCount">0</em>
+      </button>
+      <button class="icon-btn" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 11h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <em class="badge" id="cartCount">0</em>
+      </button>
+      <button class="burger" id="burger" aria-label="Menu"><i></i><i></i></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-blob b1"></div>
+      <div class="hero-blob b2"></div>
+      <div class="hero-grid-lines"></div>
+
+      <h1 class="hero-word" id="heroWord" aria-label="straightline">
+        <span>s</span><span>t</span><span>r</span><span>a</span><span>i</span><span class="y">g</span><span>h</span><span>t</span><span>l</span><span>i</span><span>n</span><span>e</span>
+      </h1>
+
+      <div class="hero-stage">
+        <div class="hero-img" data-parallax="0.08">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1800&q=80&auto=format&fit=crop" alt="Living room with a yellow armchair" />
+          <div class="hero-img-shade"></div>
+        </div>
+
+        <div class="hero-copy">
+          <span class="pill"><i class="dot"></i> AI powered furniture studio</span>
+          <h2>Furniture that <em>fits</em> your life, in a straight line.</h2>
+          <p>Beds, sofas, dining sets, chairs, cabinets and storage. Designed smart, built straight and delivered to your door.</p>
+          <div class="hero-btns">
+            <a href="#products" class="btn btn-yellow magnetic">Shop collection <span class="arr">→</span></a>
+            <a href="#ai-planner" class="btn btn-ghost magnetic">Try AI planner</a>
+          </div>
+        </div>
+
+        <div class="float-card fc-1">
+          <img src="https://images.unsplash.com/photo-1551298370-9d3d53740c72?w=300&q=70&auto=format&fit=crop" alt="" />
+          <div>
+            <small>Best seller</small>
+            <b>Moulded Chair</b>
+            <span>₹ 2,499</span>
+          </div>
+        </div>
+
+        <div class="float-card fc-2">
+          <div class="mini-chart">
+            <i style="--h:40%"></i><i style="--h:65%"></i><i style="--h:50%"></i><i style="--h:85%"></i><i style="--h:70%"></i><i style="--h:100%"></i>
+          </div>
+          <div>
+            <small>AI style match</small>
+            <b>98% for you</b>
+          </div>
+        </div>
+
+        <div class="rotating-badge">
+          <svg viewBox="0 0 200 200">
+            <defs><path id="circlePath" d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0"/></defs>
+            <text><textPath href="#circlePath">CRAFTED STRAIGHT • BUILT TO LAST • STRAIGHTLINE • </textPath></text>
+          </svg>
+          <span class="rb-center">↓</span>
+        </div>
+      </div>
+
+      <div class="hero-chips" id="heroChips">
+        <a href="#products" data-cat="Living">Living room</a>
+        <a href="#products" data-cat="Bedroom">Bedroom</a>
+        <a href="#products" data-cat="Dining">Dining</a>
+        <a href="#products" data-cat="Office">Office</a>
+        <a href="#products" data-cat="Storage">Storage</a>
+        <a href="#products" data-cat="all">View all</a>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Moulded Chair</span><b>✦</b><span>Wooden Bed</span><b>✦</b><span>Dining Chairs</span><b>✦</b><span>Shoe Rack</span><b>✦</b><span>TV Cabinet</span><b>✦</b><span>Center Table</span><b>✦</b><span>Dining Set</span><b>✦</b><span>Computer Table</span><b>✦</b><span>Display Unit</span><b>✦</b><span>Study Table</span><b>✦</b><span>Sofa</span><b>✦</b><span>Wardrobe</span><b>✦</b>
+        <span>Moulded Chair</span><b>✦</b><span>Wooden Bed</span><b>✦</b><span>Dining Chairs</span><b>✦</b><span>Shoe Rack</span><b>✦</b><span>TV Cabinet</span><b>✦</b><span>Center Table</span><b>✦</b><span>Dining Set</span><b>✦</b><span>Computer Table</span><b>✦</b><span>Display Unit</span><b>✦</b><span>Study Table</span><b>✦</b><span>Sofa</span><b>✦</b><span>Wardrobe</span><b>✦</b>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section categories" id="categories">
+      <div class="sec-head">
+        <span class="eyebrow" data-reveal="up">01 / Shop by space</span>
+        <h2 class="sec-title" data-split>Every type of furniture, <em>one straight line</em> to your home.</h2>
+      </div>
+
+      <div class="cat-grid">
+        <a href="#products" class="cat-card big" data-cat="Living" data-reveal="up">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=75&auto=format&fit=crop" alt="Living room sofa" />
+          <div class="cat-info"><small>48 designs</small><h3>Living Room</h3><span class="cat-go">↗</span></div>
+        </a>
+        <a href="#products" class="cat-card" data-cat="Bedroom" data-reveal="up" style="--d:.1s">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=75&auto=format&fit=crop" alt="Bedroom" />
+          <div class="cat-info"><small>36 designs</small><h3>Bedroom</h3><span class="cat-go">↗</span></div>
+        </a>
+        <a href="#products" class="cat-card" data-cat="Dining" data-reveal="up" style="--d:.2s">
+          <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=75&auto=format&fit=crop" alt="Dining" />
+          <div class="cat-info"><small>29 designs</small><h3>Dining</h3><span class="cat-go">↗</span></div>
+        </a>
+        <a href="#products" class="cat-card" data-cat="Office" data-reveal="up" style="--d:.1s">
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=900&q=75&auto=format&fit=crop" alt="Office" />
+          <div class="cat-info"><small>22 designs</small><h3>Office &amp; Study</h3><span class="cat-go">↗</span></div>
+        </a>
+        <a href="#products" class="cat-card" data-cat="Storage" data-reveal="up" style="--d:.2s">
+          <img src="https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=900&q=75&auto=format&fit=crop" alt="Storage" />
+          <div class="cat-info"><small>31 designs</small><h3>Storage</h3><span class="cat-go">↗</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section products" id="products">
+      <div class="sec-head row">
+        <div>
+          <span class="eyebrow" data-reveal="up">02 / Product types</span>
+          <h2 class="sec-title" data-split>Pick a piece, <em>we'll do the rest.</em></h2>
+        </div>
+        <p class="sec-sub" data-reveal="up">Tap a product type to filter. Every piece comes with free delivery, installation and a 5 year warranty.</p>
+      </div>
+
+      <div class="chips" id="chips" data-reveal="up"></div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <!-- SHOP THE LOOK (hotspots) -->
+    <section class="section look" id="look">
+      <div class="look-wrap">
+        <div class="look-text">
+          <span class="eyebrow" data-reveal="up">03 / Shop the look</span>
+          <h2 class="sec-title" data-split>Tap the dots. <em>Own the room.</em></h2>
+          <p data-reveal="up">Every room we style is fully shoppable. Hover on the glowing points to see what's inside and add it straight to your cart.</p>
+          <ul class="look-list" data-reveal="up">
+            <li><b>01</b> Yellow lounge chair <span>₹ 14,999</span></li>
+            <li><b>02</b> Brass floor lamp <span>₹ 4,299</span></li>
+            <li><b>03</b> Low TV console <span>₹ 18,499</span></li>
+          </ul>
+          <a href="#products" class="btn btn-dark magnetic" data-reveal="up">Shop this room <span class="arr">→</span></a>
+        </div>
+        <div class="look-img" data-reveal="scale">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1400&q=80&auto=format&fit=crop" alt="Styled living room" />
+          <button class="hotspot" style="left:46%;top:62%"><i></i><span class="tip"><b>Yellow lounge chair</b>₹ 14,999</span></button>
+          <button class="hotspot" style="left:34%;top:30%"><i></i><span class="tip"><b>Brass floor lamp</b>₹ 4,299</span></button>
+          <button class="hotspot" style="left:80%;top:68%"><i></i><span class="tip"><b>Low TV console</b>₹ 18,499</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI PLANNER -->
+    <section class="section ai" id="ai-planner">
+      <div class="ai-bg">
+        <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span>
+        <div class="ai-grid"></div>
+      </div>
+      <div class="sec-head center">
+        <span class="eyebrow light" data-reveal="up">04 / Straightline AI</span>
+        <h2 class="sec-title light" data-split>Design your room with <em>AI in 3 clicks.</em></h2>
+        <p class="sec-sub light" data-reveal="up">Tell us your space, style and budget. Our AI stylist matches you with furniture, colours and a ready to buy moodboard.</p>
+      </div>
+
+      <div class="ai-panel" data-reveal="up">
+        <div class="ai-controls">
+          <div class="ai-step">
+            <label><b>1</b> Choose your room</label>
+            <div class="opt-row" data-group="room">
+              <button class="opt active" data-v="Living">🛋 Living</button>
+              <button class="opt" data-v="Bedroom">🛏 Bedroom</button>
+              <button class="opt" data-v="Dining">🍽 Dining</button>
+              <button class="opt" data-v="Office">💻 Office</button>
+            </div>
+          </div>
+          <div class="ai-step">
+            <label><b>2</b> Pick a style</label>
+            <div class="opt-row" data-group="style">
+              <button class="opt active" data-v="Minimal">Minimal</button>
+              <button class="opt" data-v="Scandi">Scandi</button>
+              <button class="opt" data-v="Industrial">Industrial</button>
+              <button class="opt" data-v="Royal Teak">Royal Teak</button>
+              <button class="opt" data-v="Boho">Boho</button>
+            </div>
+          </div>
+          <div class="ai-step">
+            <label><b>3</b> Budget <span class="budget-val" id="budgetVal">₹ 75,000</span></label>
+            <input type="range" id="budget" min="15000" max="300000" step="5000" value="75000" />
+          </div>
+          <button class="btn btn-yellow big magnetic" id="aiGenerate">✦ Generate my room</button>
+        </div>
+
+        <div class="ai-output" id="aiOutput">
+          <div class="ai-idle" id="aiIdle">
+            <div class="ai-sphere"><i></i><i></i><i></i></div>
+            <p>Your AI moodboard will appear here</p>
+          </div>
+          <div class="ai-loading" id="aiLoading">
+            <div class="scan"></div>
+            <p class="ai-type" id="aiType"></p>
+            <div class="ai-bar"><i id="aiBar"></i></div>
+          </div>
+          <div class="ai-result" id="aiResult"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stat" data-reveal="up"><b class="count" data-to="15">0</b><em>+</em><span>Years of craft</span></div>
+      <div class="stat" data-reveal="up" style="--d:.1s"><b class="count" data-to="50000">0</b><em>+</em><span>Happy homes</span></div>
+      <div class="stat" data-reveal="up" style="--d:.2s"><b class="count" data-to="1200">0</b><em>+</em><span>Unique designs</span></div>
+      <div class="stat" data-reveal="up" style="--d:.3s"><b class="count" data-to="4.9" data-dec="1">0</b><em>★</em><span>Customer rating</span></div>
+    </section>
+
+    <!-- LOOKBOOK COVERFLOW -->
+    <section class="section lookbook" id="lookbook">
+      <div class="sec-head center">
+        <span class="eyebrow" data-reveal="up">05 / Lookbook</span>
+        <h2 class="sec-title" data-split>Rooms we've <em>straightened up.</em></h2>
+      </div>
+      <div class="coverflow" id="coverflow">
+        <div class="cf-track" id="cfTrack"></div>
+        <button class="cf-btn prev" id="cfPrev" aria-label="Previous">‹</button>
+        <button class="cf-btn next" id="cfNext" aria-label="Next">›</button>
+      </div>
+      <p class="cf-caption" id="cfCaption">Modern interior</p>
+      <div class="cf-dots" id="cfDots"></div>
+    </section>
+
+    <!-- MATERIALS horizontal scroll -->
+    <section class="materials" id="materials">
+      <div class="mat-sticky">
+        <div class="mat-head">
+          <span class="eyebrow light">06 / Materials</span>
+          <h2 class="sec-title light">Honest materials. <em>Straight quality.</em></h2>
+        </div>
+        <div class="mat-track" id="matTrack">
+          <article class="mat-card" style="--c:#7A5230">
+            <div class="mat-swatch wood"></div>
+            <h3>Solid Sheesham</h3><p>Rich grain, termite treated, built for generations of family dinners.</p><span>Beds · Dining · TV units</span>
+          </article>
+          <article class="mat-card" style="--c:#A9743F">
+            <div class="mat-swatch teak"></div>
+            <h3>Premium Teak</h3><p>Naturally oily and water resistant. The royal choice for statement pieces.</p><span>Sofas · Display units</span>
+          </article>
+          <article class="mat-card" style="--c:#D9CBB4">
+            <div class="mat-swatch eng"></div>
+            <h3>Engineered Wood</h3><p>Precise, light and affordable with laminates in over 40 finishes.</p><span>Wardrobes · Study tables</span>
+          </article>
+          <article class="mat-card" style="--c:#2B2B2B">
+            <div class="mat-swatch metal"></div>
+            <h3>Powder Coated Metal</h3><p>Rust proof frames with clean industrial lines that never wobble.</p><span>Shoe racks · Computer tables</span>
+          </article>
+          <article class="mat-card" style="--c:#8A9A7B">
+            <div class="mat-swatch fabric"></div>
+            <h3>Performance Fabric</h3><p>Stain resistant, pet friendly upholstery in calm, earthy tones.</p><span>Sofas · Lounge chairs</span>
+          </article>
+          <article class="mat-card" style="--c:#FBBA16">
+            <div class="mat-swatch poly"></div>
+            <h3>Moulded Polymer</h3><p>Stackable, weatherproof and bright. Made for cafés, balconies and kids' rooms.</p><span>Moulded chairs · Stools</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section process" id="process">
+      <div class="sec-head center">
+        <span class="eyebrow" data-reveal="up">07 / How we craft</span>
+        <h2 class="sec-title" data-split>From sketch to your space, <em>in a straight line.</em></h2>
+      </div>
+      <div class="timeline" id="timeline">
+        <svg class="tl-line" viewBox="0 0 1000 120" preserveAspectRatio="none"><path id="tlPath" d="M0,60 C150,0 250,120 400,60 S650,0 750,60 S900,120 1000,60"/></svg>
+        <div class="tl-step" data-reveal="up"><span class="tl-ic">✎</span><b>01</b><h4>Choose or customise</h4><p>Pick from 1,200 designs or tweak size, fabric and finish.</p></div>
+        <div class="tl-step" data-reveal="up" style="--d:.15s"><span class="tl-ic">⚒</span><b>02</b><h4>Crafted in house</h4><p>Our karigars build it in our own factory with 42 quality checks.</p></div>
+        <div class="tl-step" data-reveal="up" style="--d:.3s"><span class="tl-ic">⛟</span><b>03</b><h4>Safe delivery</h4><p>Five layer packing and live tracking right to your doorstep.</p></div>
+        <div class="tl-step" data-reveal="up" style="--d:.45s"><span class="tl-ic">✓</span><b>04</b><h4>Free installation</h4><p>Experts assemble and place it. You just sit back and relax.</p></div>
+      </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="section why">
+      <div class="why-grid">
+        <div class="why-big" data-reveal="left">
+          <h2 class="sec-title">Why homes choose <em>Straightline</em></h2>
+          <p>We cut out the middlemen and the guesswork. Factory direct prices, honest materials and a team that picks up the phone.</p>
+          <a href="#contact" class="btn btn-dark magnetic">Visit our studio <span class="arr">→</span></a>
+        </div>
+        <div class="why-card tilt" data-reveal="up"><span class="why-ic">₹</span><h4>Factory direct prices</h4><p>Up to 40% less than showroom retail.</p></div>
+        <div class="why-card tilt yellow" data-reveal="up" style="--d:.1s"><span class="why-ic">5Y</span><h4>5 year warranty</h4><p>On every frame, joint and hinge.</p></div>
+        <div class="why-card tilt" data-reveal="up" style="--d:.2s"><span class="why-ic">⟲</span><h4>Easy returns</h4><p>Changed your mind? 10 day returns.</p></div>
+        <div class="why-card tilt dark" data-reveal="up" style="--d:.3s"><span class="why-ic">✦</span><h4>Custom sizes</h4><p>Made to measure for your exact space.</p></div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section reviews" id="reviews">
+      <div class="sec-head center">
+        <span class="eyebrow" data-reveal="up">08 / Reviews</span>
+        <h2 class="sec-title" data-split>Loved in <em>50,000+ homes.</em></h2>
+      </div>
+      <div class="rev-row r1" id="revRow1"></div>
+      <div class="rev-row r2" id="revRow2"></div>
+    </section>
+
+    <!-- CTA / CONTACT -->
+    <section class="cta" id="contact">
+      <div class="cta-shapes"><i></i><i></i><i></i></div>
+      <div class="cta-inner">
+        <div class="cta-text">
+          <h2 data-split>Let's straighten up <em>your space.</em></h2>
+          <p data-reveal="up">Book a free home measurement or a design consultation. We'll call you back within 30 minutes.</p>
+          <ul class="cta-points" data-reveal="up">
+            <li>✓ Free 3D room layout</li>
+            <li>✓ Fabric and wood samples at home</li>
+            <li>✓ No cost EMI available</li>
+          </ul>
+        </div>
+        <form class="cta-form" id="ctaForm" data-reveal="scale">
+          <h3>Book a free consult</h3>
+          <div class="field"><input type="text" id="fName" required placeholder=" " /><label for="fName">Your name</label></div>
+          <div class="field"><input type="tel" id="fPhone" required placeholder=" " /><label for="fPhone">Phone number</label></div>
+          <div class="field">
+            <select id="fNeed" required>
+              <option value="" disabled selected hidden></option>
+              <option>Full home furniture</option>
+              <option>Living room</option>
+              <option>Bedroom</option>
+              <option>Dining</option>
+              <option>Office or study</option>
+            </select>
+            <label for="fNeed">I'm looking for</label>
+          </div>
+          <button class="btn btn-dark big magnetic" type="submit">Request a call back <span class="arr">→</span></button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-logo"><img src="assets/logo.png" alt="Straightline" /></div>
+        <p>Furniture for every corner of your home. Designed smart, built straight.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Facebook">FB</a><a href="#" aria-label="YouTube">YT</a><a href="#" aria-label="Pinterest">PI</a>
+        </div>
+      </div>
+      <div class="foot-col"><h5>Shop</h5><a href="#products">Moulded Chairs</a><a href="#products">Wooden Beds</a><a href="#products">Dining Sets</a><a href="#products">TV Cabinets</a><a href="#products">Shoe Racks</a></div>
+      <div class="foot-col"><h5>More</h5><a href="#products">Study Tables</a><a href="#products">Computer Tables</a><a href="#products">Display Units</a><a href="#products">Center Tables</a><a href="#products">Dining Chairs</a></div>
+      <div class="foot-col"><h5>Company</h5><a href="#process">How we craft</a><a href="#lookbook">Lookbook</a><a href="#ai-planner">AI planner</a><a href="#contact">Contact</a></div>
+    </div>
+    <div class="foot-giant" aria-hidden="true">strai<span>g</span>htline</div>
+    <div class="foot-bottom"><span>© 2026 Straightline Furniture. All rights reserved.</span><a href="#home" class="to-top">Back to top ↑</a></div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
